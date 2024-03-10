@@ -67,6 +67,7 @@
       <!-- Buttons for selecting the language/photo -->
       <button class="language-button" onclick="drawText('english')">Use English Photo</button>
       <button class="language-button" onclick="drawText('arabic')">Use Arabic Photo</button>
+        <button id="saveBtn">Save Image</button>
     </div>
 
     <canvas id="nameCanvas" width="1080" height="1080"></canvas>
@@ -110,6 +111,18 @@
               image.src = 'preset_image_ar.jpg';  // Adjust path to your Arabic photo
           }
       }
+
+      document.getElementById('saveBtn').addEventListener('click', function() {
+    var canvas = document.getElementById('nameCanvas');
+    var dataURL = canvas.toDataURL('image/png');
+    var a = document.createElement('a');
+    a.href = dataURL;
+    a.download = 'custom-image.png'; // You can name the downloaded image file here
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});
+
   </script>
 
 
