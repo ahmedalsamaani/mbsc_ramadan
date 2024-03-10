@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MBSC Ramadan Card</title>
+  <style>
+      /* Base styles */
+      body {
+          text-align: center;
+          margin: 0;
+          padding: 20px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: #f0f0f0;
+      }
+
+      .input-container {
+          margin-bottom: 20px;
+          background-color: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          display: inline-block;
+      }
+
+      #nameInput {
+          width: 80%;
+          padding: 10px;
+          margin-bottom: 15px; /* Space between input and buttons */
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+      }
+
+      .language-button {
+          width: 80%;
+          padding: 10px;
+          margin-bottom: 10px; /* Space between buttons */
+          background-color: #9C1E26;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background-color 0.3s;
+      }
+
+      .language-button:hover {
+          background-color: #CD212C;
+      }
+
+      canvas {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: auto;
+          margin-top: 20px; /* Space above the canvas */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+  </style>
+  
+
+
+</head>
+<body>
+    <div class="input-container">
+      <input type="text" id="nameInput" placeholder="Enter your name">
+
+      <!-- Buttons for selecting the language/photo -->
+      <button class="language-button" onclick="drawText('english')">Use English Photo</button>
+      <button class="language-button" onclick="drawText('arabic')">Use Arabic Photo</button>
+    </div>
+
+    <canvas id="nameCanvas" width="1080" height="1080"></canvas>
+
+  <script>
+      function drawText(language) {
+          var canvas = document.getElementById('nameCanvas');
+          var ctx = canvas.getContext('2d');
+          var name = document.getElementById('nameInput').value;
+
+          // Clear the canvas
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Create a new image object
+          var image = new Image();
+          image.onload = function() {
+              // Draw the image on the canvas
+              ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+              // Set text properties (customize as needed)
+              ctx.font = '27px Verdana';
+              
+              ctx.fillStyle = 'white';
+
+              // Adjust text position based on the selected language/photo
+              if (language === 'english') {
+                  // Position for the English photo
+                ctx.textAlign = 'left';
+                  ctx.fillText(name, 260, 500);
+              } else if (language === 'arabic') {
+                  // Position for the Arabic photo
+                ctx.textAlign = 'right';
+                  ctx.fillText(name, 800, 520);
+              }
+          };
+
+          // Set the source of the image based on the selected language
+          if (language === 'english') {
+              image.src = 'preset_image.png';  // Adjust path to your English photo
+          } else if (language === 'arabic') {
+              image.src = 'preset_image_ar.jpg';  // Adjust path to your Arabic photo
+          }
+      }
+  </script>
+
+
+</body>
+</html>
